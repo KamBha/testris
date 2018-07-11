@@ -1,0 +1,42 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00B7FF; }
+
+table {
+  table-layout: fixed;
+  border-collapse: collapse; }
+
+td {
+  border: 3px outset #615e5e;
+  background-color: #7a7478;
+  width: 20px;
+  height: 20px; }
+
+.yellow {
+  background-color: yellow; }
+
+.cyan {
+  background-color: cyan; }
+
+.red {
+  background-color: red; }
+
+.aqua {
+  background-color: aqua; }
+
+.blue {
+  background-color: blue; }
+
+.purple {
+  background-color: purple; }
+
+.orange {
+  background-color: orange; }
+
+.green {
+  background-color: green; }
+
+/*# sourceMappingURL=style.css.map */
