@@ -44,3 +44,10 @@ set to determine what column pieces were over the RHS and use the size to determ
 # Day 7
 Implemented code to determine if piece now locked in. Implemneted console on HTML.
 
+# Day 8
+Committed to github. Painful I think because git didn't and kept getting an unrelated histories error. This was resolved by doing a git pull --allow-unrelated-histories.
+
+I think this was because I was missing a LICENSE.MD file.
+
+# Day 9
+Added support for PieceSelector. Can now generate random pieces. Also, added landed piece to grid.

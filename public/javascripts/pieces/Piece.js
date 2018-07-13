@@ -3,64 +3,10 @@ export function Piece(pieceRow, pieceColumn, shapeSpecification) {
     this.pieceRowPosition = pieceRow; // Counterintiuitively, this can be a number greater than the grid size
     // TODO: Rename to boundingBoxColumnPosition
     this.pieceColumnPosition = pieceColumn; // Counterintiuitively, this can be below zero or greater than the row size
-    // this.shape = [
-    //                 [1, 0],
-    //                 [1, 0],
-    //                 [1, 1],
-    //              ];
-    // this.shape = [
-    //                 [0, 1, 0],
-    //                 [1, 1, 1],
-    //                 [0, 0, 0]
-    //              ];
 
     this.rotationPosition = 0;
 
-    // this.shapeSpecification = {
-    //     rotationSpecification: [
-    //         [
-    //             [1, 0, 0, 0],
-    //             [1, 0, 0, 0],
-    //             [1, 0, 0, 0],
-    //             [1, 0, 0, 0],
-    //         ],
-    //         [
-    //             [0, 0, 0, 0],
-    //             [0, 0, 0, 0],
-    //             [1, 1, 1, 1],
-    //             [0, 0, 0, 0],
-    //         ]
-    //     ],
-    //     colour: 'cyan'
-    // };
-
-    this.shapeSpecification = {
-        rotationSpecification: [
-            [
-                [ 0, 1, 0 ],
-                [ 0, 1, 0 ],
-                [ 0, 1, 1 ],
-            ],
-            [
-                [ 0, 0, 0 ],
-                [ 1, 1, 1 ],
-                [ 1, 0, 0 ],
-            ],
-
-            [
-                [ 1, 1, 0 ],
-                [ 0, 1, 0 ],
-                [ 0, 1, 0 ],
-            ],
-
-            [
-                [ 0, 0, 1 ],
-                [ 1, 1, 1 ],
-                [ 0, 0, 0 ],
-            ],
-        ],
-        colour: 'cyan'
-    };
+    this.shapeSpecification = shapeSpecification;
 
     this.isPieceOnGridLocation = function isPieceOnGridLocation(row, column) {
         if (!isGridLocationInBoundingBox(this, this.retrieveCurrentShape(), row, column)) {
@@ -148,8 +94,12 @@ export function Piece(pieceRow, pieceColumn, shapeSpecification) {
         return retrieveShape(this.shapeSpecification, this.rotationPosition);
     };
 
+    this.getAllPositionsOccupiedByCurrentPiece = function getAllPositionsOccupiedByCurrentPiece() {
+        return getAllPositionsOccupiedByPiece(this.retrieveCurrentShape(), this.pieceRowPosition, this.pieceColumnPosition);
+    }
+
     function retrieveShape(shapeSpecification, rotationPosition) {
-        return shapeSpecification.rotationSpecification[rotationPosition]
+        return shapeSpecification.rotationSpecification[rotationPosition];
     }
 
     /**

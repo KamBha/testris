@@ -1,3 +1,6 @@
+import { PieceSelector } from "./pieces/PieceSelector.js";
+import { Piece } from "./pieces/Piece.js";
+
 export function createGameBoard(initialisationData) {
     let dm = {};
     const width = initialisationData.width ? initialisationData.width : 10;
@@ -6,6 +9,7 @@ export function createGameBoard(initialisationData) {
 
     dm.grid = createGrid(height, width);
     dm.dropRate = 10000;
+    dm.pieceSelector = new PieceSelector();
 
     dm.rotate = function rotate() {
         dm.currentPiece.rotate(dm.grid);
@@ -16,6 +20,7 @@ export function createGameBoard(initialisationData) {
         dm.pieceCannotMoveDown = false;
         dm.downPressed = false;
         dm.timeLocked = 0;
+        dm.currentPiece = new Piece(0, 3, dm.pieceSelector.addNewSelection());
     }
 
     dm.dropCurrentPieceDown = function dropCurrentPieceDown(time) {
@@ -53,6 +58,22 @@ export function createGameBoard(initialisationData) {
         }
         dm.pieceCannotMoveDown = false;
         dm.currentPiece.moveDown();
+    }
+
+    dm.checkPieceStatus = function checkPieceStatus(time) {
+        if (dm.isPieceLocked(time)) {
+            dm.addPieceToBoard();
+        }
+    }
+
+    dm.addPieceToBoard = function addPieceToBoard() {
+        var pieceAddedToGrid = dm.currentPiece;
+        dm.currentPiece.getAllPositionsOccupiedByCurrentPiece().forEach(addPiece);
+        dm.currentPiece = new Piece(0, 3, dm.pieceSelector.addNewSelection());
+
+        function addPiece(location) {
+            dm.grid[location.row][location.column] = pieceAddedToGrid.shapeSpecification.colour;
+        }
     }
 
     dm.isPieceLocked = function isPieceLocked(time) {

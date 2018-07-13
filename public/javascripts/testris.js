@@ -6,6 +6,7 @@ let dataModel = createGameBoard({width: 10, height: 20});
 var lastDropTime = 0;
 function gameLoop(time) {
     dataModel.dropCurrentPieceDown(time);
+    dataModel.checkPieceStatus(time);
     render(time);
     window.requestAnimationFrame(gameLoop);
 }
@@ -65,8 +66,6 @@ function onKeyUp(event) {
         dataModel.togglePressDown();
     }
 }
-
-dataModel.currentPiece = new Piece(0, 3);
 
 document.addEventListener('keypress', onKeyPress);
 document.addEventListener('keyup', onKeyUp);
